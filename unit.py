@@ -1,6 +1,6 @@
 class Unit(object):
     def __init__(self,name:list,abrv:list):
-        if type(name) == list or type(name) == str and type(abrv) == str:
+        if (type(name) == list or type(name) == str) and type(abrv) == str:
             if type(name) == list and 1 < len(name) <=2:
                 Exception("If name is a list it must contain from 1 to 2 elements")
             self.name = name
@@ -23,6 +23,25 @@ class Unit(object):
             else:
                 return self.name[0]
 
+    def __mul__(self,units):
+        if type(units) == Unit:
+            return (ComplexUnit({},{})*self)*units
+        elif type(units) == ComplexUnit:
+            return units*self
+        else:
+            TypeError("Only Unit and ComplexUnit supported for this operation")
+                
+    def __truediv__(self,units):
+        if type(units) == Unit or type(units) == ComplexUnit:
+            return (ComplexUnit({},{})*self)/units
+        else:
+            TypeError("Only Unit and ComplexUnit supported for this operation")
+
+    def __imul__(self,units):
+        self=self*units
+                
+    def __idiv__(self,units):
+        self=self/units
 
 class ComplexUnit(object):
     def __init__(self,num:dict=None,denom:dict=None,name:list=None,abrv:list=None):
@@ -78,6 +97,7 @@ class ComplexUnit(object):
                     self/=unit
         else:
             TypeError("Only Unit and ComplexUnit supported for this operation")
+        return self
                 
     def __truediv__(self,units):
         if type(units) == Unit:
@@ -98,6 +118,7 @@ class ComplexUnit(object):
                     self*=unit
         else:
             TypeError("Only Unit and ComplexUnit supported for this operation")
+        return self
 
     def __imul__(self,units):
         self=self*units
@@ -124,7 +145,7 @@ class ComplexUnit(object):
                 if value <=1:
                     ret+="⋅"+key.abrv
                 else:
-                    ret+="⋅"+key.abrv+[self.__num_to_supertext(int(i)) for i in str(value)].join('')
+                    ret+="⋅"+key.abrv+''.join([self.__num_to_supertext(int(i)) for i in str(value)])
         else:
             if len(self.denominator) > 0:
                 ret+="11"
@@ -134,7 +155,7 @@ class ComplexUnit(object):
                 if value <=1:
                     ret+=key.abrv+"⋅"
                 else:
-                    ret+=key.abrv+[self.__num_to_supertext(int(i)) for i in str(value)].join('')+"⋅"
+                    ret+=key.abrv+''.join([self.__num_to_supertext(int(i)) for i in str(value)])+"⋅"
         return ret[1:-1]
 
     def __num_to_supertext(self,int):
