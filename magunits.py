@@ -94,9 +94,18 @@ mag1024=Mag(
     delta_unit_top=1024
 )
 
-seconds=Unit(["second","seconds"],["s","s"])
-seconds=Unit(["meter","meters"],["m","m"])
-seconds=Unit(["gram","grams"],["g","g"])
-seconds=Unit(["ampere","amperes"],["A","A"])
-seconds=Unit(["kelvin","kelvins"],["K","K"])
-seconds=Unit("candela","cd")
+seconds=Unit(["second","seconds"],"s")
+meter=Unit(["meter","meters"],"m")
+gram=Unit(["gram","grams"],"g")
+ampere=Unit(["ampere","amperes"],"A")
+kelvine=Unit(["kelvin","kelvins"],"K")
+candela=Unit("candela","cd")
+
+bit=Unit(["bit","bits"],"b")
+byte=Unit(["byte","bytes"],"B")
+
+hertz=ComplexUnit({},{},"hertz","Hz")/seconds
+newton=ComplexUnit({},{},"newton","N")*gram*meter/seconds/seconds
+pascal=ComplexUnit({},{},"pascal","Pa")*newton/meter/meter
+joule=ComplexUnit({},{},"joule","J")*newton*meter
+watt=ComplexUnit({},{},"watt","W")*joule/seconds
