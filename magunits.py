@@ -94,3 +94,9 @@ mag1024=Mag(
     delta_unit_top=1024
 )
 
+seconds=Unit(["second","seconds"],["s","s"])
+seconds=Unit(["meter","meters"],["m","m"])
+seconds=Unit(["gram","grams"],["g","g"])
+seconds=Unit(["ampere","amperes"],["A","A"])
+seconds=Unit(["kelvin","kelvins"],["K","K"])
+seconds=Unit("candela","cd")
