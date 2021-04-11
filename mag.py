@@ -24,11 +24,11 @@ class Mag(object):
     def parse_value(self,value:int,full:bool=False):
         max=list(self.mag_list.keys())[0]
         min=list(self.mag_list.keys())[-1:][0]
-        if value >= max:
+        if value >= max and self.top != 1:
             if full:
                 return (round(value/max,ndigits=13),self.mag_list[max]["full_name"])
             return (round(value/max,ndigits=13),self.mag_list[max]["abrv"])
-        if value <= min:
+        if value <= min and self.bottom != 1:
             if full:
                 return (round(value/min,ndigits=13),self.mag_list[min]["full_name"])
             return (round(value/min,ndigits=13),self.mag_list[min]["abrv"])
